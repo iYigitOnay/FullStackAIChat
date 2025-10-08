@@ -1,0 +1,214 @@
+/* ---------- Temel reset ---------- */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- Tema ---------- */
+:root {
+  --navy-900: #0b2447; /* header ve butonlar */
+  --navy-800: #102a56; /* hover/odak */
+  --navy-100: #e8f0ff; /* kendi mesaj balonu */
+  --white: #ffffff;
+  --bg: #f5f7fb; /* genel arka plan */
+  --text: #0f172a; /* ana metin */
+  --muted: #64748b; /* ikincil metin */
+  --border: #e5e7eb; /* çizgiler */
+  --positive: #16a34a; /* duygu renkleri */
+  --neutral: #64748b;
+  --negative: #dc2626;
+}
+
+/* ---------- Uygulama ızgarası ---------- */
+
+/* ---------- Header ---------- */
+.header {
+  background: linear-gradient(180deg, var(--navy-900), #0f2f66);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: 16px;
+}
+.subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-left: 8px;
+}
+
+/* ---------- Mesaj listesi ---------- */
+.list {
+  position: relative;
+  overflow-y: auto;
+  padding: 16px;
+  background: url("/wa-bg.svg") center/420px 420px repeat,
+    linear-gradient(#f7f9ff, #f7f9ff);
+}
+
+.empty {
+  color: var(--muted);
+}
+
+/* ---------- Mesaj satırı ---------- */
+.row {
+  display: flex;
+  margin-bottom: 10px;
+}
+.row--self {
+  justify-content: flex-end;
+}
+.row--other {
+  justify-content: flex-start;
+}
+
+/* ---------- Mesaj balonu ---------- */
+.bubble {
+  max-width: min(680px, 78%);
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--white);
+  position: relative;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02);
+}
+.bubble--self {
+  background: var(--navy-100);
+  border-color: #dbe5ff;
+}
+.text {
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Duygu rozeti ---------- */
+.sentiment {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  display: inline-block;
+}
+.sentiment.positive .dot {
+  background: var(--positive);
+}
+.sentiment.neutral .dot {
+  background: var(--neutral);
+}
+.sentiment.negative .dot {
+  background: var(--negative);
+}
+.sentiment.unknown .dot {
+  background: #9ca3af;
+}
+
+/* ---------- Composer (mesaj yazma alanı) ---------- */
+.composer {
+  border-top: 1px solid var(--border);
+  background: var(--white);
+  padding: 12px;
+}
+.composer-inner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 14px;
+}
+.input:focus {
+  border-color: #b3c7ff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+.send {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  background: var(--navy-900);
+  color: var(--white);
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.02s ease-in-out, background 0.15s;
+}
+.send:hover {
+  background: var(--navy-800);
+}
+.send:active {
+  transform: translateY(1px);
+}
+.send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #4b5e86;
+}
+
+/* ---------- Küçük ekran uyumu ---------- */
+@media (max-width: 480px) {
+  .bubble {
+    max-width: 90%;
+  }
+}
+
+/* ---------- Orta kolon kabuk ---------- */
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  padding: 24px;
+}
+
+/* Panel: ortada kart görünümü, sayfanın ~1/3'ü */
+.panel {
+  width: clamp(360px, 33vw, 720px);
+  height: min(78vh, 820px);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+}
+
+/* İç ızgara (header/list/composer) */
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 60px 1fr 76px;
+}
